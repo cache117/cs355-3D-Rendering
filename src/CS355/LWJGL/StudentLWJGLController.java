@@ -1,7 +1,6 @@
 package CS355.LWJGL;
 
 import org.lwjgl.input.Keyboard;
-import sun.rmi.runtime.Log;
 
 import java.util.Iterator;
 import java.util.logging.Logger;
@@ -19,12 +18,10 @@ public class StudentLWJGLController implements CS355LWJGLController
 
     private static final float ASPECT = (LWJGLSandbox.DISPLAY_WIDTH / LWJGLSandbox.DISPLAY_HEIGHT);
     private static final float UNIT = 1.0f;
-    private static final float FOVY = 65f;
-    private static final float CLIPPING = FOVY / 1.3f;
+    private static final float FOVY = 60f, CLIPPING = FOVY / 2.0f;
     private static final float Z_NEAR = 1, Z_FAR = 200;
 
     private final WireFrame model;
-
     private Point3D cameraLocation;
     private double rotation;
     private float movementAmount;
@@ -36,9 +33,6 @@ public class StudentLWJGLController implements CS355LWJGLController
     {
         this.model = new HouseModel();
     }
-
-    //This method is called to "resize" the viewport to match the screen.
-    //When you first start, have it be in perspective mode.
 
     /**
      * This is called when the program first starts to initialize the viewport. It resizes the viewport to match the screen.
@@ -126,7 +120,7 @@ public class StudentLWJGLController implements CS355LWJGLController
         {
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
-            glOrtho(-CLIPPING, CLIPPING, -CLIPPING, CLIPPING, Z_NEAR, Z_FAR);
+            glOrtho(-CLIPPING, CLIPPING, -CLIPPING, CLIPPING, Z_NEAR, Z_FAR * 2);
         }
         //p switch to perspective projection
         else if (isKeyDown(Keyboard.KEY_P))
@@ -147,23 +141,19 @@ public class StudentLWJGLController implements CS355LWJGLController
         {
             movementAmount = UNIT * 1.0f;
             LOGGER.info("Normal speed");
-        }
-        else if (isKeyDown(Keyboard.KEY_2))
+        } else if (isKeyDown(Keyboard.KEY_2))
         {
             movementAmount = UNIT * 2.0f;
             LOGGER.info("Quicker speed");
-        }
-        else if (isKeyDown(Keyboard.KEY_3))
+        } else if (isKeyDown(Keyboard.KEY_3))
         {
             movementAmount = UNIT * 3.0f;
             LOGGER.info("Fast speed");
-        }
-        else if (isKeyDown(Keyboard.KEY_4))
+        } else if (isKeyDown(Keyboard.KEY_4))
         {
             movementAmount = UNIT * 4.0f;
             LOGGER.info("Really Fast speed");
-        }
-        else if (isKeyDown(Keyboard.KEY_5))
+        } else if (isKeyDown(Keyboard.KEY_5))
         {
             movementAmount = UNIT * 10.0f;
             LOGGER.info("WARNING: Super-sonic speed");
