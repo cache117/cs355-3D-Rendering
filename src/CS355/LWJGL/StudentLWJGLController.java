@@ -191,13 +191,13 @@ public class StudentLWJGLController implements CS355LWJGLController
     private void moveUp()
     {
         LOGGER.fine("Moving Up");
-        cameraLocation.y += movementAmount;
+        cameraLocation.y -= movementAmount;
     }
 
     private void moveDown()
     {
         LOGGER.fine("Moving Down");
-        cameraLocation.y -= movementAmount;
+        cameraLocation.y += movementAmount;
     }
 
     private void rotateRight()
